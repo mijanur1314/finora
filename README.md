@@ -129,10 +129,10 @@ A comprehensive full-stack financial management application that helps users tra
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                         Frontend (React)                     │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐      │
-│  │  Dashboard   │  │ Transactions │  │   Reports    │      │
-│  └──────────────┘  └──────────────┘  └──────────────┘      │
+│                         Frontend (React)                    │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐       │
+│  │  Dashboard   │  │ Transactions │  │   Reports    │       │
+│  └──────────────┘  └──────────────┘  └──────────────┘       │
 │         │                  │                  │             │
 │         └──────────────────┴──────────────────┘             │
 │                            │                                │
@@ -142,10 +142,10 @@ A comprehensive full-stack financial management application that helps users tra
                          REST API
                               │
 ┌─────────────────────────────┴───────────────────────────────┐
-│                      Backend (Express)                       │
-│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐      │
-│  │ Controllers  │  │   Services   │  │ Middlewares  │      │
-│  └──────────────┘  └──────────────┘  └──────────────┘      │
+│                      Backend (Express)                      │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐       │
+│  │ Controllers  │  │   Services   │  │ Middlewares  │       │
+│  └──────────────┘  └──────────────┘  └──────────────┘       │
 │         │                  │                  │             │
 │         └──────────────────┴──────────────────┘             │
 │                            │                                │
