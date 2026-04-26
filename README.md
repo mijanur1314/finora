@@ -363,6 +363,14 @@ git push origin feature/your-change
 
 ---
 
+## Author
+
+**Sk Mijanur Rahaman**
+
+Email: `skmijanurrahaman1314@gmail.com`
+
+---
+
 ## License
 
 ISC
