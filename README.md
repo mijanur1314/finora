@@ -1,21 +1,85 @@
 # Finora
 
-Finora is a full-stack personal finance application for tracking transactions, analyzing spending, and scheduling financial reports.
+<div align="center">
 
-## Stack
+![Finora Banner](https://img.shields.io/badge/Finora-Personal%20Finance%20Platform-1f7a5c?style=for-the-badge)
 
-Backend:
+A modern full-stack finance app for tracking transactions, analyzing spending, scanning receipts, and scheduling reports.
+
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![React](https://img.shields.io/badge/React-20232A?style=flat&logo=react&logoColor=61DAFB)](https://react.dev/)
+[![Node.js](https://img.shields.io/badge/Node.js-43853D?style=flat&logo=node.js&logoColor=white)](https://nodejs.org/)
+[![Express](https://img.shields.io/badge/Express-111111?style=flat)](https://expressjs.com/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=flat&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
+[![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat&logo=vite&logoColor=white)](https://vite.dev/)
+
+</div>
+
+---
+
+## Overview
+
+Finora is a monorepo with:
+
+- a TypeScript Express API in `backend`
+- a React + Vite frontend in `client`
+- JWT-based authentication
+- analytics, reporting, file uploads, and AI-powered receipt scanning
+
+It is designed for personal finance workflows such as:
+
+- tracking income and expenses
+- uploading and scanning receipts
+- reviewing dashboard summaries and charts
+- generating and scheduling reports
+
+---
+
+## Highlights
+
+### Transaction Management
+
+- Create, update, delete, and duplicate transactions
+- Bulk transaction import
+- Receipt scanning via Google Gemini AI
+- File uploads handled with Multer and Cloudinary
+
+### Analytics
+
+- Summary metrics
+- Chart-based spending insights
+- Expense category breakdowns
+
+### Reports
+
+- On-demand report generation
+- Report scheduling support
+- Email delivery through Resend
+
+### Authentication
+
+- User registration and login
+- JWT access token authentication
+- Protected API routes with Passport
+
+---
+
+## Tech Stack
+
+### Backend
+
 - Node.js
 - Express
 - TypeScript
-- MongoDB with Mongoose
+- MongoDB and Mongoose
 - Passport JWT
 - Zod
 - Cloudinary
 - Resend
 - Google Gemini AI
 
-Frontend:
+### Frontend
+
 - React 18
 - TypeScript
 - Vite
@@ -25,31 +89,43 @@ Frontend:
 - Radix UI
 - Recharts
 
-## Monorepo Layout
+---
+
+## Project Structure
 
 ```text
 finora/
 |-- backend/
 |   |-- src/
+|   |   |-- config/
+|   |   |-- controllers/
+|   |   |-- middlewares/
+|   |   |-- models/
+|   |   |-- routes/
+|   |   |-- services/
+|   |   |-- utils/
+|   |   `-- validators/
 |   |-- package.json
 |   `-- .env
 |-- client/
 |   |-- src/
+|   |   |-- app/
+|   |   |-- components/
+|   |   |-- features/
+|   |   |-- hooks/
+|   |   |-- layouts/
+|   |   |-- pages/
+|   |   `-- routes/
 |   |-- package.json
 |   `-- .env
 `-- README.md
 ```
 
-## Features
+---
 
-- User registration and login with JWT-based auth
-- Transaction create, update, delete, duplicate, and bulk import flows
-- Receipt scanning with Gemini AI
-- Analytics summary, charts, and expense breakdowns
-- Scheduled reports and email delivery
-- Profile updates with file upload support
+## Getting Started
 
-## Prerequisites
+### Prerequisites
 
 - Node.js 18 or newer
 - npm
@@ -58,9 +134,7 @@ finora/
 - Resend account
 - Google AI Studio API key
 
-## Installation
-
-Clone the repository and install dependencies for both apps.
+### Installation
 
 ```bash
 git clone https://github.com/mijanur1314/finora.git
@@ -73,7 +147,9 @@ cd ../client
 npm install
 ```
 
-## Environment Variables
+---
+
+## Environment Setup
 
 Create `backend/.env`:
 
@@ -109,7 +185,13 @@ VITE_API_URL=http://localhost:8000/api
 VITE_REDUX_PERSIST_SECRET_KEY=your_redux_persist_secret
 ```
 
-## Running Locally
+### Security Note
+
+Do not commit real secrets to source control. If credentials have already been exposed, rotate them before deploying.
+
+---
+
+## Local Development
 
 Start the backend:
 
@@ -131,11 +213,13 @@ Default local URLs:
 - Backend: `http://localhost:8000`
 - API base: `http://localhost:8000/api`
 
-If login requests fail with `ERR_CONNECTION_REFUSED`, the backend is not running or exited during startup.
+If the frontend shows `ERR_CONNECTION_REFUSED` for `localhost:8000`, the backend is not running or exited during startup.
 
-## Build Commands
+---
 
-Backend:
+## Build and Verify
+
+### Backend
 
 ```bash
 cd backend
@@ -143,7 +227,7 @@ npm run build
 npm start
 ```
 
-Frontend:
+### Frontend
 
 ```bash
 cd client
@@ -151,20 +235,32 @@ npm run build
 npm run preview
 ```
 
-## Available Scripts
+### Available Scripts
 
-Backend scripts:
+Backend:
 
-- `npm run dev` - start the backend with `ts-node-dev`
-- `npm run build` - compile TypeScript and copy `package.json` to `dist`
-- `npm start` - run the compiled backend from `dist`
+- `npm run dev`
+- `npm run build`
+- `npm start`
 
-Frontend scripts:
+Frontend:
 
-- `npm run dev` - start the Vite dev server
-- `npm run build` - type-check and create a production build
-- `npm run lint` - run ESLint
-- `npm run preview` - preview the production build locally
+- `npm run dev`
+- `npm run build`
+- `npm run lint`
+- `npm run preview`
+
+### Current Verification
+
+The repo currently supports:
+
+- backend TypeScript compilation and build
+- frontend TypeScript build
+- frontend ESLint checks
+
+There are currently no `npm test` scripts configured in either app.
+
+---
 
 ## API Overview
 
@@ -174,17 +270,17 @@ Base path:
 /api
 ```
 
-Auth routes:
+### Auth
 
 - `POST /auth/register`
 - `POST /auth/login`
 
-User routes:
+### User
 
 - `GET /user/current-user`
 - `PUT /user/update`
 
-Transaction routes:
+### Transactions
 
 - `POST /transaction/create`
 - `POST /transaction/scan-receipt`
@@ -196,35 +292,66 @@ Transaction routes:
 - `DELETE /transaction/delete/:id`
 - `DELETE /transaction/bulk-delete`
 
-Analytics routes:
+### Analytics
 
 - `GET /analytics/summary`
 - `GET /analytics/chart`
 - `GET /analytics/expense-breakdown`
 
-Report routes:
+### Reports
 
 - `GET /report/all`
 - `GET /report/generate`
 - `PUT /report/update-setting`
 
-Most routes except auth require a valid JWT access token.
+Most routes other than auth require a valid JWT access token.
 
-## Current Verification Status
+---
 
-These checks are available in the repo today:
+## Production Readiness
 
-- Backend build
-- Frontend build
-- Frontend lint
+Finora can be deployed, but production setup should include the following before going live:
 
-Automated `npm test` scripts are not configured yet in either `backend` or `client`.
+- Use strong, rotated secrets for JWT, database, email, AI, and storage services
+- Set `NODE_ENV=production`
+- Set `FRONTEND_ORIGIN` to the real frontend domain
+- Set `VITE_API_URL` to the public backend API URL
+- Ensure MongoDB network access rules allow the deployment platform
+- Use HTTPS on both frontend and backend
+- Add request rate limiting
+- Add centralized logging and monitoring
+- Add automated tests before high-confidence production releases
 
-## Notes
+### Backend Deployment Checklist
 
-- The backend connects to MongoDB during startup and exits if the database connection fails.
-- Cron jobs are initialized in development mode.
-- Uploaded files are handled with Multer and Cloudinary.
+- Build with `npm run build`
+- Start with `npm start`
+- Provide all backend environment variables
+- Confirm database connectivity at startup
+- Confirm Cloudinary, Resend, and Gemini credentials are valid
+
+### Frontend Deployment Checklist
+
+- Build with `npm run build`
+- Deploy the generated `client/dist`
+- Set `VITE_API_URL` to the deployed backend
+
+### Recommended Hosting
+
+- Backend: Render, Railway, Fly.io, or any Node-capable VPS/container platform
+- Frontend: Vercel, Netlify, Cloudflare Pages, or any static hosting provider
+- Database: MongoDB Atlas
+
+---
+
+## Known Gaps
+
+- No automated test suite yet
+- No documented rate limiting middleware yet
+- No health-check endpoint beyond the root route
+- Development startup depends on successful MongoDB connection
+
+---
 
 ## Contributing
 
@@ -233,6 +360,8 @@ git checkout -b feature/your-change
 git commit -m "Describe your change"
 git push origin feature/your-change
 ```
+
+---
 
 ## License
 
