@@ -43,6 +43,8 @@ export interface TransactionDocument extends Document {
   date: Date;
   status: keyof typeof TransactionStatusEnum;
   paymentMethod: keyof typeof PaymentMethodEnum;
+  isDeleted: boolean;
+  deletedAt?: Date;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -110,6 +112,14 @@ const transactionSchema = new Schema<TransactionDocument>(
       type: String,
       enum: Object.values(PaymentMethodEnum),
       default: PaymentMethodEnum.CASH,
+    },
+    isDeleted: {
+      type: Boolean,
+      default: false,
+    },
+    deletedAt: {
+      type: Date,
+      default: null,
     },
   },
   {

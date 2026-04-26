@@ -1,16 +1,16 @@
 export const formatCurrency = (value: number,
-  options: { 
-    currency?: string; 
+  options: {
+    currency?: string;
     decimalPlaces?: number;
     compact?: boolean;
     showSign?: boolean;
     isExpense?: boolean;
   } = {}
-):string => {
+): string => {
   const { currency = 'USD', decimalPlaces = 2, compact = false, showSign = false, isExpense = false } = options;
 
   const displayValue = isExpense ? -Math.abs(value) : value;
-  
+
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency,

@@ -73,17 +73,17 @@ const formSchema = z.object({
 
 type FormValues = z.infer<typeof formSchema>;
 
-const TransactionForm = (props: { 
-  isEdit?: boolean; 
+const TransactionForm = (props: {
+  isEdit?: boolean;
   transactionId?: string
   onCloseDrawer?: () => void;
- }) => {
-  const {onCloseDrawer, isEdit = false, transactionId } = props;
+}) => {
+  const { onCloseDrawer, isEdit = false, transactionId } = props;
 
   const [isScanning, setIsScanning] = useState(false);
 
-  const {data, isLoading } = useGetSingleTransactionQuery(
-    transactionId || "",{skip: !transactionId}
+  const { data, isLoading } = useGetSingleTransactionQuery(
+    transactionId || "", { skip: !transactionId }
   );
   const editData = data?.transaction;
 
@@ -166,15 +166,15 @@ const TransactionForm = (props: {
       recurringInterval: values.frequency || null,
     };
     if (isEdit && transactionId) {
-      updateTransaction({id: transactionId, transaction: payload})
-      .unwrap()
-      .then(() => {
-        onCloseDrawer?.();
-        toast.success("Transaction updated successfully");
-      })
-      .catch((error) => {
-        toast.error(error.data.message || "Failed to update transaction");
-      });
+      updateTransaction({ id: transactionId, transaction: payload })
+        .unwrap()
+        .then(() => {
+          onCloseDrawer?.();
+          toast.success("Transaction updated successfully");
+        })
+        .catch((error) => {
+          toast.error(error.data.message || "Failed to update transaction");
+        });
       return;
     }
     createTransaction(payload)
@@ -187,7 +187,7 @@ const TransactionForm = (props: {
       .catch((error) => {
         toast.error(error.data.message || "Failed to create transaction");
       });
-    
+
   };
 
   return (
@@ -225,7 +225,7 @@ const TransactionForm = (props: {
                         shadow-sm border p-2 flex-1 justify-center 
                         `,
                         field.value === _TRANSACTION_TYPE.INCOME &&
-                          "!border-primary"
+                        "!border-primary"
                       )}
                     >
                       <RadioGroupItem
@@ -244,7 +244,7 @@ const TransactionForm = (props: {
                         shadow-sm border p-2 flex-1 justify-center 
                         `,
                         field.value === _TRANSACTION_TYPE.EXPENSE &&
-                          "!border-primary"
+                        "!border-primary"
                       )}
                     >
                       <RadioGroupItem
@@ -292,8 +292,6 @@ const TransactionForm = (props: {
                         {...field}
                         disabled={isScanning}
                         onValueChange={(value) => field.onChange(value || "")}
-                        placeholder="$0.00"
-                        prefix="$"
                       />
                     </div>
                   </FormControl>
@@ -312,7 +310,7 @@ const TransactionForm = (props: {
                   <SingleSelector
                     value={
                       CATEGORIES.find((opt) => opt.value === field.value) ||
-                      field.value
+                        field.value
                         ? { value: field.value, label: field.value }
                         : undefined
                     }

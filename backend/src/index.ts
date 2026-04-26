@@ -35,11 +35,10 @@ app.use(
 );
 
 app.get("/", asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-    throw new BadRequestException("This is a test error");
-    res.status(HTTPSTATUS.OK).json({
-      message: "Hello Subcribe to the channel",
-    });
-  })
+  res.status(HTTPSTATUS.OK).json({
+    message: "Hello Subscribe to the channel",
+  });
+})
 );
 
 
@@ -55,10 +54,10 @@ getDateRange("lastMonth")
 
 app.listen(Env.PORT, async () => {
   await connctDatabase();
-  
+
   if (Env.NODE_ENV === "development") {
     await initializeCrons();
   }
-      
+
   console.log(`Server is running on port ${Env.PORT} in ${Env.NODE_ENV} mode`);
 });

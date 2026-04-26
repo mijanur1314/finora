@@ -57,6 +57,7 @@ export const getAllTransactionService = async (
 
   const filterConditions: Record<string, any> = {
     userId,
+    isDeleted: false,
   };
 
   if (keyword) {
@@ -110,6 +111,7 @@ export const getTransactionByIdService = async (
   const transaction = await TransactionModel.findOne({
     _id: transactionId,
     userId,
+    isDeleted: false,
   });
   if (!transaction) throw new NotFoundException("Transaction not found");
 
@@ -123,6 +125,7 @@ export const duplicateTransactionService = async (
   const transaction = await TransactionModel.findOne({
     _id: transactionId,
     userId,
+    isDeleted: false,
   });
   if (!transaction) throw new NotFoundException("Transaction not found");
 
@@ -151,6 +154,7 @@ export const updateTransactionService = async (
   const existingTransaction = await TransactionModel.findOne({
     _id: transactionId,
     userId,
+    isDeleted: false,
   });
   if (!existingTransaction)
     throw new NotFoundException("Transaction not found");
@@ -197,10 +201,18 @@ export const deleteTransactionService = async (
   userId: string,
   transactionId: string
 ) => {
-  const deleted = await TransactionModel.findByIdAndDelete({
-    _id: transactionId,
-    userId,
-  });
+  const deleted = await TransactionModel.findOneAndUpdate(
+    {
+      _id: transactionId,
+      userId,
+      isDeleted: false,
+    },
+    {
+      isDeleted: true,
+      deletedAt: new Date(),
+    },
+    { new: true }
+  );
   if (!deleted) throw new NotFoundException("Transaction not found");
 
   return;
@@ -210,17 +222,24 @@ export const bulkDeleteTransactionService = async (
   userId: string,
   transactionIds: string[]
 ) => {
-  const result = await TransactionModel.deleteMany({
-    _id: { $in: transactionIds },
-    userId,
-  });
+  const result = await TransactionModel.updateMany(
+    {
+      _id: { $in: transactionIds },
+      userId,
+      isDeleted: false,
+    },
+    {
+      isDeleted: true,
+      deletedAt: new Date(),
+    }
+  );
 
-  if (result.deletedCount === 0)
+  if (result.modifiedCount === 0)
     throw new NotFoundException("No transations found");
 
   return {
     sucess: true,
-    deletedCount: result.deletedCount,
+    deletedCount: result.modifiedCount,
   };
 };
 

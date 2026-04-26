@@ -1,12 +1,11 @@
-import { Response } from "express";
-import { ErrorRequestHandler } from "express";
+import { ErrorRequestHandler, Response } from "express";
 import { HTTPSTATUS } from "../config/http.config";
 import { AppError } from "../utils/app-error";
-import { z, ZodError } from "zod";
+import { ZodError } from "zod";
 import { ErrorCodeEnum } from "../enums/error-code.enum";
 import { MulterError } from "multer";
 
-const formatZodError = (res: Response, error: z.ZodError) => {
+const formatZodError = (res: Response, error: ZodError) => {
   const errors = error?.issues?.map((err) => ({
     field: err.path.join("."),
     message: err.message,
@@ -38,7 +37,7 @@ export const errorHandler: ErrorRequestHandler = (
   error,
   req,
   res,
-  next
+  _next
 ): any => {
   console.log("Error occurred on PATH:", req.path, "Error:", error);
 
@@ -64,6 +63,8 @@ export const errorHandler: ErrorRequestHandler = (
 
   return res.status(HTTPSTATUS.INTERNAL_SERVER_ERROR).json({
     message: "Internal Server Error",
-    error: error?.message || "Unknow error occurred",
+    errorCode: ErrorCodeEnum.INTERNAL_SERVER_ERROR,
+    error:
+      error instanceof Error ? error.message : "Unknown error occurred",
   });
 };
