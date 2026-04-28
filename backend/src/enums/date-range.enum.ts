@@ -1,4 +1,8 @@
 export enum DateRangeEnum {
+  TODAY = "today",
+  LAST_7_DAYS = "7days",
+  THIS_WEEK = "thisWeek",
+  LAST_WEEK = "lastWeek",
   LAST_30_DAYS = "30days",
   LAST_MONTH = "lastMonth",
   LAST_3_MONTHS = "last3Months",

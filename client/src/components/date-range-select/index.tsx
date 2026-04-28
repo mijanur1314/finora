@@ -4,9 +4,13 @@ import {
   subDays,
   subMonths,
   subYears,
+  subWeeks,
   startOfMonth,
   startOfYear,
+  startOfWeek,
+  endOfWeek,
   endOfDay,
+  startOfDay,
 } from "date-fns";
 import { Button } from "@/components/ui/button";
 import {
@@ -18,6 +22,10 @@ import { cn } from "@/lib/utils";
 import { ChevronDownIcon } from "lucide-react";
 
 export const DateRangeEnum = {
+  TODAY: "today",
+  LAST_7_DAYS: "7days",
+  THIS_WEEK: "thisWeek",
+  LAST_WEEK: "lastWeek",
   LAST_30_DAYS : "30days",
   LAST_MONTH : "lastMonth",
   LAST_3_MONTHS : "last3Months",
@@ -54,10 +62,50 @@ const today = endOfDay(now);
 
 const presets: DateRangePreset[] = [
   {
+    label: "Today",
+    value: DateRangeEnum.TODAY,
+    getRange: () => ({
+      from: startOfDay(now),
+      to: today,
+      value: DateRangeEnum.TODAY,
+      label: "for Today",
+    }),
+  },
+  {
+    label: "Last 7 Days",
+    value: DateRangeEnum.LAST_7_DAYS,
+    getRange: () => ({
+      from: subDays(startOfDay(now), 6),
+      to: today,
+      value: DateRangeEnum.LAST_7_DAYS,
+      label: "for Past 7 Days",
+    }),
+  },
+  {
+    label: "This Week",
+    value: DateRangeEnum.THIS_WEEK,
+    getRange: () => ({
+      from: startOfWeek(now, { weekStartsOn: 1 }), // Assuming Monday start
+      to: today,
+      value: DateRangeEnum.THIS_WEEK,
+      label: "for This Week",
+    }),
+  },
+  {
+    label: "Last Week",
+    value: DateRangeEnum.LAST_WEEK,
+    getRange: () => ({
+      from: startOfWeek(subWeeks(now, 1), { weekStartsOn: 1 }),
+      to: endOfDay(endOfWeek(subWeeks(now, 1), { weekStartsOn: 1 })),
+      value: DateRangeEnum.LAST_WEEK,
+      label: "for Last Week",
+    }),
+  },
+  {
     label: "Last 30 Days",
     value: DateRangeEnum.LAST_30_DAYS,
     getRange: () => ({
-      from: subDays(today, 29),
+      from: subDays(startOfDay(now), 29),
       to: today,
       value: DateRangeEnum.LAST_30_DAYS,
       label: "for Past 30 Days",

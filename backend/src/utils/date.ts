@@ -2,11 +2,15 @@ import {
   endOfDay,
   endOfMonth,
   endOfYear,
+  startOfDay,
   startOfMonth,
   startOfYear,
+  startOfWeek,
+  endOfWeek,
   subDays,
   subMonths,
   subYears,
+  subWeeks,
 } from "date-fns";
 import { DateRangeEnum, DateRangePreset } from "../enums/date-range.enum";
 
@@ -28,7 +32,7 @@ export const getDateRange = (
   // const yesterday = subDays(now.setHours(0, 0, 0, 0), 1);
   const today = endOfDay(now);
   const last30Days = {
-    from: subDays(today, 29),
+    from: subDays(startOfDay(now), 29),
     to: today,
     value: DateRangeEnum.LAST_30_DAYS,
     label: "Last 30 Days",
@@ -42,6 +46,34 @@ export const getDateRange = (
         to: null,
         value: DateRangeEnum.ALL_TIME,
         label: "All Time",
+      };
+    case DateRangeEnum.TODAY:
+      return {
+        from: startOfDay(now),
+        to: today,
+        value: DateRangeEnum.TODAY,
+        label: "Today",
+      };
+    case DateRangeEnum.LAST_7_DAYS:
+      return {
+        from: subDays(startOfDay(now), 6),
+        to: today,
+        value: DateRangeEnum.LAST_7_DAYS,
+        label: "Last 7 Days",
+      };
+    case DateRangeEnum.THIS_WEEK:
+      return {
+        from: startOfWeek(now, { weekStartsOn: 1 }),
+        to: today,
+        value: DateRangeEnum.THIS_WEEK,
+        label: "This Week",
+      };
+    case DateRangeEnum.LAST_WEEK:
+      return {
+        from: startOfWeek(subWeeks(now, 1), { weekStartsOn: 1 }),
+        to: endOfDay(endOfWeek(subWeeks(now, 1), { weekStartsOn: 1 })),
+        value: DateRangeEnum.LAST_WEEK,
+        label: "Last Week",
       };
     case DateRangeEnum.LAST_30_DAYS:
       return last30Days;
