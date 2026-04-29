@@ -343,7 +343,7 @@ Finora can be deployed, but production setup should include the following before
 Finora is currently deployed and live:
 
 - **Frontend (Vercel):** [https://finora-blue.vercel.app](https://finora-blue.vercel.app)
-- **Backend (Render):** [https://finora-37ii.onrender.com](https://finora-37ii.onrender.com)
+- **Backend:** Hosted securely on Render
 - **Database:** MongoDB Atlas
 
 ---
