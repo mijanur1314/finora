@@ -6,6 +6,8 @@
 
 A modern full-stack finance app for tracking transactions, analyzing spending, scanning receipts, and scheduling reports.
 
+**🚀 [Live Demo](https://finora-blue.vercel.app)**
+
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![React](https://img.shields.io/badge/React-20232A?style=flat&logo=react&logoColor=61DAFB)](https://react.dev/)
 [![Node.js](https://img.shields.io/badge/Node.js-43853D?style=flat&logo=node.js&logoColor=white)](https://nodejs.org/)
@@ -336,11 +338,13 @@ Finora can be deployed, but production setup should include the following before
 - Deploy the generated `client/dist`
 - Set `VITE_API_URL` to the deployed backend
 
-### Recommended Hosting
+### Deployment
 
-- Backend: Render, Railway, Fly.io, or any Node-capable VPS/container platform
-- Frontend: Vercel, Netlify, Cloudflare Pages, or any static hosting provider
-- Database: MongoDB Atlas
+Finora is currently deployed and live:
+
+- **Frontend (Vercel):** [https://finora-blue.vercel.app](https://finora-blue.vercel.app)
+- **Backend (Render):** [https://finora-37ii.onrender.com](https://finora-37ii.onrender.com)
+- **Database:** MongoDB Atlas
 
 ---
 

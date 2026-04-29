@@ -55,9 +55,7 @@ getDateRange("lastMonth")
 app.listen(Env.PORT, async () => {
   await connctDatabase();
 
-  if (Env.NODE_ENV === "development") {
-    await initializeCrons();
-  }
+  await initializeCrons();
 
   console.log(`Server is running on port ${Env.PORT} in ${Env.NODE_ENV} mode`);
 });
